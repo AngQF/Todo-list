@@ -1,24 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import List from "./list.jsx";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [input, setInput] = useState("");
+	const [tasks, setTasks] = useState([]);
+
+	const DeleteItems = (indexItem) => {
+		setTasks((x) => x.filter((x, index) => index !== indexItem));
+	};
+
 	return (
-		<div>
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="bg-light justify-content-center">
+			<p className="title text-center">todos</p>
+			<input
+				className=" col-4 border-0 shadow p-3"
+				type="text"
+				onChange={(e) => setInput(e.target.value)}
+				value={input}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						input !== "" && input !== " "
+							? setTasks([...tasks, input])
+							: null;
+						setInput("");
+					}
+				}}
+			/>
+
+			<ul className="list-group">
+				{tasks.map((task, index) => (
+					<List
+						key={index}
+						inputTask={task}
+						quit={() => DeleteItems(index)}
+					/>
+				))}
+				;
+				<span className="col-4 border-0 shadow p-3 bg-white">
+					{tasks.length === 0
+						? "No tasks, add a task"
+						: tasks.length + " item left"}
+				</span>
+			</ul>
 		</div>
 	);
 };
