@@ -6,7 +6,7 @@ const Home = () => {
 	const [tasks, setTasks] = useState([]);
 
 	const DeleteItems = (indexItem) => {
-		setTasks((x) => x.filter((x, index) => index !== indexItem));
+		setTasks(() => tasks.filter((value, index) => index !== indexItem));
 	};
 
 	return (
