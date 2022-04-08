@@ -5,8 +5,8 @@ const Home = () => {
 	const [input, setInput] = useState("");
 	const [tasks, setTasks] = useState([]);
 
-	const DeleteItems = (indexItem) => {
-		setTasks(() => tasks.filter((value, index) => index !== indexItem));
+	const DeleteList = (indexList) => {
+		setTasks(() => tasks.filter((value, index) => index !== indexList));
 	};
 
 	return (
@@ -32,7 +32,7 @@ const Home = () => {
 					<List
 						key={index}
 						inputTask={task}
-						quit={() => DeleteItems(index)}
+						quit={() => DeleteList(index)}
 					/>
 				))}
 				;
